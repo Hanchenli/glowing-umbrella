@@ -1,0 +1,21 @@
+多数元素，在list中有出现次数大于一半的数字，找到它。
+分治
+对于每个子序列，比较左右两个序列里面含的最多的两个数字的含量谁更多。
+代码如下：
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        def major(l,r):
+            if (r==l):
+                return nums[l]
+            
+            left=major( l, l+(r-l)//2)
+            right=major( l+(r-l)//2+1, r)
+
+            if(left==right):
+                return left
+            if (nums[l:r+1].count(left)> nums[l:r+1].count(right)):
+                return left
+            else:
+                return right
+        
+        return major(0, len(nums)-1)
