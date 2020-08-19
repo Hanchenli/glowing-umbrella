@@ -1,0 +1,19 @@
+50 
+指数和底数都有正负的快速幂
+采用dict，如果遇到以前存过的直接调用，否则计算后存入
+代码：
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        dic={0:1, 1:x, -1: 1/x}
+        def fastpow(x, k):
+            
+            if (k in dic):
+                return dic[k]
+            
+            left=k//2
+            right=k-k//2
+            value=fastpow(x, left)*fastpow(x, right)
+            dic[k]=value
+            return value
+        
+        return fastpow(x, n)
