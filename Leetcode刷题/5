@@ -1,0 +1,60 @@
+最长回文字串
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        l=len(s)
+        if (l<2):
+            return s
+        maxl=1
+        center=1
+        width=0
+
+        for i in range(0, l):
+            j=1
+            f=True
+            while (i-j>-1 and i+j<l):
+                
+                
+                if (s[i-j]!= s[i+j]):
+                    f=False
+                    break
+                if (j*2+1> maxl):
+                    # print (i, j, maxl, sep=' ', end='\n')
+                    maxl=j*2+1
+                    center=i
+                    width=j 
+                j+=1 
+
+        # print(maxl)
+                
+                    
+        maxl2=0
+        center2=0
+        width2=0
+        for i in range(0,l):
+            j=0
+            f=True
+            while (i-j>-1 and i+j+1<l):
+                if (s[i-j]!= s[i+j+1]):
+                    f=False
+                    break
+                j+=1
+                if (j*2> maxl2):
+                    # print (i, j, maxl2, sep=' ', end='\n')
+                    maxl2=j*2
+                    center2=i
+                    width2=j
+                
+
+        if(maxl>maxl2):
+            ans=""
+            start=center-width
+            for i in range(width*2+1):
+                ans+=s[start+i] 
+        else:
+            
+            ans=""
+            start=center2-width2+1
+            
+            for i in range(width2*2):
+                ans+=s[start+i]
+        return ans
